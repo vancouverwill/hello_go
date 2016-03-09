@@ -47,9 +47,16 @@ Iter returns items in no particular order
 func (b *Bag) Iter() <-chan interface{} {
     ch := make(chan interface{});
     go func () {
+        if b.First == nil {
+            close(ch)
+            return
+        }
         current := b.First
-        for current.next != nil {
+        for current.next != nil  {
             ch <- current.item
+            // if !current.next.(node) {
+            //     break
+            // }
             current = current.next
         }
         
