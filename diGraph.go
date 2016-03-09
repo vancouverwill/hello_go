@@ -27,18 +27,15 @@ func NewDiGraph(V int) *diGraph {
 func (dg *diGraph) addEdge(v int, w int) error {
     if v < 0 || v >= dg.V { return errors.New("v is out of range") }
     if w < 0 || w >= dg.V { return errors.New("w is out of range") }
-    // fmt.Printf("%d -- %d\n", v, w)
-    // temp := dg.adj[v]
+    
     dg.adj[v].Add(w)
     dg.E++
     return nil
 }
 
-// func (dg *diGraph) Adj(v int) (<-chan interface{}, error) {
-func (dg *diGraph) Adj(v int) (<-chan interface{}) {
-    // if v < 0 || v >= dg.V { return nil, errors.New("v is out of range") }
-    // return dg.adj[v].Iter(), nil
-    return dg.adj[v].Iter()
+func (dg *diGraph) Adj(v int) (<-chan interface{}, error) {
+    if v < 0 || v >= dg.V { return nil, errors.New("v is out of range") }
+    return dg.adj[v].Iter(), nil
 }
 
 func (dg *diGraph) toString() {
@@ -47,19 +44,15 @@ func (dg *diGraph) toString() {
     
     for v := 0; v < dg.V; v++ {
             s += strconv.Itoa(v) + ": "
-            // iter, err := dg.Adj(v)
-            // if err != nil {
-            //     log.Fatal("out of range")
-            // }
-            // for w:= range(dg.Adj(v)) {
-            for w:= range(dg.adj[v].Iter()) {
+            iterable, err := dg.Adj(v)
+            if err != nil {
+                log.Fatal("index out of range")
+            }
+            for w:= range(iterable) {
                 wint, ok := w.(int)
                 if ok {
-                    // println(original.b())
                     s += strconv.Itoa(wint) + " "
-                }
-                // wInt := int(w)
-                
+                }                
             }
             s += "\n"
         }
@@ -76,15 +69,9 @@ func readFileIntoGraph(filename string) {
    
    stringResults := string(results[:])
    
-   re := regexp.MustCompile(`\n`)
-   ints := re.Split(stringResults, -1)
+   regNewLine := regexp.MustCompile(`\n`)
+   ints := regNewLine.Split(stringResults, -1)
    
-//    fmt.Println(len(ints))
-
-//    line := 0
-//    var g *diGraph
-   
-//    v := ints[0]
    v, err := strconv.Atoi(ints[0])
     if (err != nil) {
         log.Fatal("not a valid number of vertices on first line of input txt")
@@ -107,8 +94,6 @@ func readFileIntoGraph(filename string) {
             log.Fatal("there is a problem with the content at index " + string(i))
        }
     //    fmt.Printf("v:%s  w:%s arrayLength:%d\n\n", vertices[0][0], vertices[1][1], len(vertices))
-    //    v:= 
-    //    w:= 
        
        v, err := strconv.Atoi(vertices[0][0])
         if (err != nil) {
@@ -118,32 +103,11 @@ func readFileIntoGraph(filename string) {
         if (err != nil) {
             log.Fatal("not a valid point w")
         }
-    //    fmt.Printf("%d %d\n", v, w) 
        err = g.addEdge(v, w)
        if (err != nil) {
             log.Fatal("not a valid point w")
         }
    }
    
-   g.toString()
-   
-//    fmt.Println(g)
-   
-   
-   
-   
-//    for _, number := range(ints) {
-//     //    fmt.Println(string(i) + ":" + number)
-//         fmt.Println(number)
-//         if (line == 0) {
-//             num, err := strconv.Atoi(number)
-//             if (err != nil) {
-//                 log.Fatal("not a valid number on first line of input txt")
-//             }
-            
-//         }
-//         line++
-//    }
-   
-   
+   g.toString()   
 }

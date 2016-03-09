@@ -54,9 +54,6 @@ func (b *Bag) Iter() <-chan interface{} {
         current := b.First
         for current.next != nil  {
             ch <- current.item
-            // if !current.next.(node) {
-            //     break
-            // }
             current = current.next
         }
         

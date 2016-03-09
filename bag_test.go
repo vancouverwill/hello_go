@@ -64,6 +64,5 @@ func TestBagRemovesItems(t *testing.T) {
     assert.True(t, b.Size() == 2, "test bag with two additions has two objects inside")
     
     b.Remove()
-    
     assert.Equal(t, 1, b.Size(), "test bag with two additions and one removed has one objects inside")
 }

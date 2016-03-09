@@ -11,7 +11,7 @@ func GetNames(filename string) {
    results, err := ioutil.ReadFile(filename)
    
    if (err != nil) {
-       log.Fatal()
+       log.Fatal(err.Error)
    }
    
    regYear := regexp.MustCompile(`(Popularity in)\s([0-9]{4})(</h)`)
