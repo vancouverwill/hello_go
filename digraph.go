@@ -60,7 +60,7 @@ func (dg *diGraph) toString() {
     fmt.Printf("%s", s)
 }
 
-func readFileIntoGraph(filename string) {
+func readFileIntoGraph(filename string) diGraph {
     results, err := ioutil.ReadFile(filename)
    
    if (err != nil) {
@@ -109,5 +109,5 @@ func readFileIntoGraph(filename string) {
         }
    }
    
-   g.toString()   
+   return *g
 }
