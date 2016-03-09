@@ -17,9 +17,9 @@ type Dedup struct {
 func exampleUsageOfDedup() {
 	fmt.Println("begin Dedup")
 	unsortedStrings := []string{"r", "x", "a", "u", "t", "m"}
-
-	fmt.Println(unsortedStrings)
-	fmt.Println(dedup(unsortedStrings))
+    dedup(unsortedStrings)
+	// fmt.Println(unsortedStrings)
+	// fmt.Println(dedup(unsortedStrings))
 }
 
 func dedup(unsortedStrings []string) []string {
@@ -117,7 +117,7 @@ func (d *Dedup) exch(strings []string, indexA int, indexB int) []string {
 	oldStringA := strings[indexA]
 	strings[indexA] = strings[indexB]
 	strings[indexB] = oldStringA
-	fmt.Println(strings)
+	// fmt.Println(strings)
 	return strings
 }
 
