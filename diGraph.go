@@ -20,20 +20,51 @@ func NewDiGraph(V int) *diGraph {
     dg := new(diGraph)
     dg.V = V
     dg.E = 0
+    dg.adj = make([]Bag, V)
     return dg
 }
 
 func (dg *diGraph) addEdge(v int, w int) error {
     if v < 0 || v >= dg.V { return errors.New("v is out of range") }
     if w < 0 || w >= dg.V { return errors.New("w is out of range") }
+    // fmt.Printf("%d -- %d\n", v, w)
+    // temp := dg.adj[v]
     dg.adj[v].Add(w)
     dg.E++
     return nil
 }
 
-func (dg *diGraph) Adj(v int) (<-chan interface{}, error) {
-    if v < 0 || v >= dg.V { return nil, errors.New("v is out of range") }
-    return dg.adj[v].Iter(), nil
+// func (dg *diGraph) Adj(v int) (<-chan interface{}, error) {
+func (dg *diGraph) Adj(v int) (<-chan interface{}) {
+    // if v < 0 || v >= dg.V { return nil, errors.New("v is out of range") }
+    // return dg.adj[v].Iter(), nil
+    return dg.adj[v].Iter()
+}
+
+func (dg *diGraph) toString() {
+    s := ""
+    s += strconv.Itoa(dg.V) + " vertices, " + strconv.Itoa(dg.E) + " edges \n"
+    
+    for v := 0; v < dg.V; v++ {
+            s += strconv.Itoa(v) + ": "
+            // iter, err := dg.Adj(v)
+            // if err != nil {
+            //     log.Fatal("out of range")
+            // }
+            // for w:= range(dg.Adj(v)) {
+            for w:= range(dg.adj[v].Iter()) {
+                wint, ok := w.(int)
+                if ok {
+                    // println(original.b())
+                    s += strconv.Itoa(wint) + " "
+                }
+                // wInt := int(w)
+                
+            }
+            s += "\n"
+        }
+    
+    fmt.Printf("%s", s)
 }
 
 func readFileIntoGraph(filename string) {
@@ -68,29 +99,35 @@ func readFileIntoGraph(filename string) {
    
    for i := 2; i < 2 + e; i++ {
        numbersTrimmed := strings.TrimSpace(ints[i])
-       fmt.Printf("%s\n", numbersTrimmed)
-    //    re := regexp.MustCompile(`\s*`)
-    //    vertices := re.Split(numbersTrimmed, -1)
+       re := regexp.MustCompile(`(\b[\d]{1,2}\b)`)
        
-    //    re := regexp.MustCompile(`([\d]{1,2})`)
-       re := regexp.MustCompile(`(\b[[:digit:]]{1,2}\b)`)
-       
-       
-    //    vertices := re.FindStringSubmatch(numbersTrimmed)
-    vertices := re.FindAllStringSubmatch(numbersTrimmed, 2)
-
-    // fmt.Printf("%v", numbersTrimmed)
-       
+       vertices := re.FindAllStringSubmatch(numbersTrimmed, 2)
+              
        if len(vertices) < 2 {
-        //    fmt.Println("v:" + vertices[0])
-        fmt.Printf("i:%d", i)
-        fmt.Printf("vertices %v", vertices)
-        //    log.Fatal(vertices)
+            log.Fatal("there is a problem with the content at index " + string(i))
        }
-       fmt.Printf("v:%s  w:%s arrayLength:%d\n\n", vertices[0][0], vertices[1][1], len(vertices))
+    //    fmt.Printf("v:%s  w:%s arrayLength:%d\n\n", vertices[0][0], vertices[1][1], len(vertices))
+    //    v:= 
+    //    w:= 
+       
+       v, err := strconv.Atoi(vertices[0][0])
+        if (err != nil) {
+            log.Fatal("not a valid point v")
+        }
+       w, err := strconv.Atoi(vertices[1][1])
+        if (err != nil) {
+            log.Fatal("not a valid point w")
+        }
+    //    fmt.Printf("%d %d\n", v, w) 
+       err = g.addEdge(v, w)
+       if (err != nil) {
+            log.Fatal("not a valid point w")
+        }
    }
    
-   fmt.Println(g)
+   g.toString()
+   
+//    fmt.Println(g)
    
    
    
