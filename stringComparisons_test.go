@@ -37,3 +37,20 @@ func TestLevenshteinDistanceRecursiveDifferentWords(t *testing.T) {
 	actualDist := LevenshteinDistanceRecursive(wordA, len(wordA), wordB, len(wordB))
 	assert.Equal(t, expectedDist, actualDist, "Levenshtein distance for two equal strings should be zero")
 }
+
+func TestLevenshteinDistanceRecursiveWithOutLengthsDifferentWords(t *testing.T) {
+    expectedDist := 5
+	wordA := "willy"
+	wordB := "james"
+	actualDist := LevenshteinDistanceRecursiveWithOutLengths(wordA, wordB)
+	assert.Equal(t, expectedDist, actualDist, "Levenshtein distance for two equal strings should be zero")
+}
+
+
+func TestLevenshteinDistanceDifferentWords(t *testing.T) {
+    expectedDist := 3
+	wordA := "kitten"
+	wordB := "sitting"
+	actualDist := LevenshteinDistance(wordA, wordB)
+	assert.Equal(t, expectedDist, actualDist, "Levenshtein distance for two equal strings should be zero")
+}
