@@ -45,7 +45,7 @@ func (b *Bag) IsEmpty() bool {
 Iter returns items in no particular order
 */
 func (b *Bag) Iter() <-chan interface{} {
-    ch := make(chan interface{});
+    ch := make(chan interface{}, b.N);
     go func () {
         if b.First == nil {
             close(ch)
@@ -58,7 +58,7 @@ func (b *Bag) Iter() <-chan interface{} {
         }
         
         ch <- current.item
-        current = current.next
+        // current = current.next
         close(ch)
     } ();
     return ch

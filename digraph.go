@@ -1,8 +1,8 @@
 package main
 
 import (
-    "fmt"
     "errors"
+    "fmt"
     "io/ioutil"
     "log"
     "regexp"
@@ -38,7 +38,7 @@ func (dg *diGraph) Adj(v int) (<-chan interface{}, error) {
     return dg.adj[v].Iter(), nil
 }
 
-func (dg *diGraph) toString() {
+func (dg diGraph) String() string {
     s := ""
     s += strconv.Itoa(dg.V) + " vertices, " + strconv.Itoa(dg.E) + " edges \n"
     
@@ -57,7 +57,7 @@ func (dg *diGraph) toString() {
             s += "\n"
         }
     
-    fmt.Printf("%s", s)
+    return fmt.Sprintf("%s", s)
 }
 
 func readFileIntoGraph(filename string) diGraph {

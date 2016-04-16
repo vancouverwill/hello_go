@@ -22,10 +22,21 @@ func TestIter(t *testing.T) {
     s.add(2)
     s.add(3)
     
-    count := 3
+    count := 0
     for item := range s.Iter() {
         t.Log(item)
-        count--
+        count++
+    }
+    assert.Equal(t, 3, count, "test iterate returns 3 objects")
+}
+
+func TestEmptyIter(t *testing.T) {
+    s := NewSet()
+    
+    count := 0
+    for item := range s.Iter() {
+        t.Log(item)
+        count++
     }
     assert.Equal(t, 0, count, "test iterate returns 3 objects")
 }

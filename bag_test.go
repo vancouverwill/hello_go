@@ -25,8 +25,7 @@ func TestBagIteratesThroughAllItems(t *testing.T) {
      }
      
     objectsToGoInBag :=[]bagObject{bagObject{"will", false, }, bagObject{"james", false}, bagObject{"mike", false}}
-     
-     
+    
     for _, bagObject := range(objectsToGoInBag) {
         b.Add(bagObject)
     }
