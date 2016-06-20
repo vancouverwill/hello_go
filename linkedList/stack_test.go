@@ -1,9 +1,6 @@
-package stack
+package linkedList
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestStackConstructor(t *testing.T) {
 	s := NewStack()
@@ -36,7 +33,7 @@ func TestStackPopReturnsFilo(t *testing.T) {
 		if input[i] != temp {
 			t.Errorf("stack did not return elements in reverse order of being entered")
 		}
-		fmt.Println(temp)
+		// fmt.Println(temp)
 	}
 
 	if s.size() != 0 {

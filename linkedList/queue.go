@@ -1,9 +1,9 @@
-package stack
+package linkedList
 
 // first > > > > last
 
 type queue struct {
-	stack
+	linkedList
 	last *node
 }
 
@@ -32,7 +32,7 @@ func (q *queue) enqueue(v int) {
 }
 
 func (q *queue) dequeue() (int, error) {
-	return q.pop()
+	return q.removeFirst()
 	// if q.size == 0 {
 	// 	return 0, fmt.Errorf("queue is empty")
 	// }
