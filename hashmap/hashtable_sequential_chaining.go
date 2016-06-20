@@ -10,6 +10,7 @@ type sequentialSearchhHashTb struct {
 type queue struct {
 	start *node
 	last  *node
+	N     int
 }
 
 type node struct {
@@ -28,25 +29,28 @@ func NewsequentialSearchhHashTb(size int) *sequentialSearchhHashTb {
 func (h *sequentialSearchhHashTb) insert(i int) {
 	k := h.hash(i)
 	fmt.Printf("hash is %d", k)
-	if h.content[k].start == nil {
+	if h.content[k].N == 0 {
 		// fmt.Println("new insert")
 		h.content[k].start = new(node)
 		h.content[k].start.value = i
 		h.content[k].last = h.content[k].start
 	} else {
+		oldLast := h.content[k].last.next
 		fmt.Println("another insert")
-		h.content[k].last.next = new(node)
-		h.content[k].start.value = i
+		h.content[k].last = new(node)
+		h.content[k].last.value = i
+		oldLast.next = h.content[k].last
 	}
+	h.content[k].N++
 	h.N++
 }
 
 func (h *sequentialSearchhHashTb) contains(i int) bool {
 	k := h.hash(i)
-	// fmt.Printf("contains hash is %d", k)
+	fmt.Printf("contains hash is %d", k)
 	current := h.content[k].start
 	for {
-		// fmt.Println("current", current.value)
+		fmt.Println("current", current.value)
 		if current.value == i {
 			return true
 		}

@@ -14,6 +14,8 @@ func TestInsert(t *testing.T) {
 	input := []int{1, 11, 21}
 	for _, i := range input {
 		ht.insert(i)
+	}
+	for _, i := range input {
 		if ht.contains(i) != true {
 			t.Errorf("contains() did not work for input %d", i)
 		}
