@@ -2,18 +2,18 @@ package linkedList
 
 // first > > > > last
 
-type queue struct {
+type Queue struct {
 	linkedList
 	last *node
 }
 
-func NewQueue() *queue {
-	res := new(queue)
+func NewQueue() *Queue {
+	res := new(Queue)
 	res.n = 0
 	return res
 }
 
-func (q *queue) enqueue(v int) {
+func (q *Queue) Enqueue(v int) {
 	// q.stack.push(value)
 	// if q.size == 1 {
 	// 	q.last = q.first
@@ -31,7 +31,7 @@ func (q *queue) enqueue(v int) {
 	q.n++
 }
 
-func (q *queue) dequeue() (int, error) {
+func (q *Queue) Dequeue() (int, error) {
 	return q.removeFirst()
 	// if q.size == 0 {
 	// 	return 0, fmt.Errorf("queue is empty")

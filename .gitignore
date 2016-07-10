@@ -25,3 +25,20 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+
+# Ignore all 
+*
+
+# Unignore all with extensions
+#!*.*
+
+# Unignore all with go, html, md extensions
+!*.go
+!*.html
+!*.md
+
+# Unignore all dirs
+!*/
+
+*.DS_Store

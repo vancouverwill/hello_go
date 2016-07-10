@@ -1,6 +1,6 @@
 package linkedList
 
-type stack struct {
+type Stack struct {
 	linkedList
 }
 
@@ -11,22 +11,17 @@ type node struct {
 	next  *node
 }
 
-func NewStack() (s *stack) {
-	s = new(stack)
+func NewStack() (s *Stack) {
+	s = new(Stack)
 	s.n = 0
 	return s
 }
 
 // add new first
-func (s *stack) push(value int) {
-	oldFirst := s.first
-	n := new(node)
-	n.value = value
-	s.first = n
-	n.next = oldFirst
-	s.n++
+func (s *Stack) Push(value int) {
+	s.addFirst(value)
 }
 
-func (s *stack) pop() (int, error) {
+func (s *Stack) Pop() (int, error) {
 	return s.linkedList.removeFirst()
 }

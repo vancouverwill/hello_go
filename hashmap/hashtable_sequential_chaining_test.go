@@ -12,6 +12,7 @@ func TestNew(t *testing.T) {
 func TestInsert(t *testing.T) {
 	ht := NewsequentialSearchhHashTb(10)
 	input := []int{1, 11, 21}
+	// input := []int{1}
 	for _, i := range input {
 		ht.insert(i)
 	}

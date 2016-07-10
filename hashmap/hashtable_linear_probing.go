@@ -1,7 +1,5 @@
 package hashtable
 
-
-
 type linearProbinghHashTb struct {
 	hashTable
 	content []bucket
@@ -30,5 +28,3 @@ func (h *linearProbinghHashTb) insertIntoLPHashMap(i int) {
 	h.content[k] = bucket{i}
 	h.N++
 }
-
-
