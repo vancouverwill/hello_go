@@ -1,4 +1,4 @@
-package main
+package hello_go
 
 /*
 RotateArrayInPlace i.e. 0,1,2,3,4  -> 3,4,0,1,2
